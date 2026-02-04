@@ -8,7 +8,7 @@ namespace XtsClient.Services
 {
     public class SocketService
     {
-        private ClientWebSocket _socket;
+        private ClientWebSocket? _socket;
 
         public async Task StartAsync()
         {

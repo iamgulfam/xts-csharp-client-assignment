@@ -11,9 +11,27 @@ class Program
 
         Console.WriteLine("STEP 1: Market Data Login");
         Console.WriteLine(await marketService.GetMarketDataLoginAsync());
+        var top5Nifty50 = new List<string>
+       {
+            "RELIANCE",
+            "HDFCBANK",
+            "INFY",
+            "ICICIBANK",
+            "TCS"
+       };
+        Console.WriteLine("\nSTEP 2: Equity OHLC (Top 5 Nifty 50)");
 
-        Console.WriteLine("\nSTEP 2: Equity OHLC");
-        Console.WriteLine(await marketService.GetOhlcAsync(new { }));
+foreach (var symbol in top5Nifty50)
+{
+    var response = await marketService.GetOhlcAsync(new
+    {
+        ExchangeSegment = "NSECM",
+        Symbol = symbol,
+        Interval = "1minute"
+    });
+
+    Console.WriteLine($"Equity OHLC fetched for {symbol}");
+}
 
         Console.WriteLine("\nSTEP 3: Futures OHLC (Near Month, 1-Min)");
         var futuresRequest = new FuturesOhlcRequest();
